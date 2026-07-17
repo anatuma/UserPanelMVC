@@ -1,0 +1,53 @@
+﻿@model IEnumerable<UserPanelMVC.Models.UserNote>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+<div style="font-family: monospace; padding: 20px;">
+    <h2>Private notes dashboard</h2>
+    <hr />
+    
+    <h3>Create a new note</h3>
+    <form method="post" asp-controller="Dashboard" asp-action="AddNote" class="mb-4">
+        <div style="margin-bottom: 10px;">
+            <label>Title:</label>
+            <input type="text" name="title" required/>
+        </div>
+        
+        <div style="margin-bottom: 10px;">
+            <label>Content:</label>
+            <textarea name="content" rows="3" required></textarea>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    
+    <h3>Your saved notes</h3>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-secondary">You have not created any notes yet!</div>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var note in Model)
+            {
+                <div style="margin-bottom: 10px;">
+                    <strong>* @note.Title</strong><br />
+                    <span>> @note.Content</span>
+                </div>
+            }
+        </ul>
+    }
+    
+    <a href="/" class="mt-5">Back to home page</a>
+</div>
+</body>
+</html>

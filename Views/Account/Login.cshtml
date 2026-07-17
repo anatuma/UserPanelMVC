@@ -1,0 +1,31 @@
+﻿@model UserPanelMVC.Models.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Authentication</title>
+</head>
+<body>
+<div style="font-family: monospace; padding: 20px;">
+    <h2>Login to your account</h2>
+    <hr />
+    <form method="post" asp-controller="Account" asp-action="Login">
+        <div asp-validation-summary="All" style="color: red;"></div>
+        <div style="margin-bottom: 10px;">
+            <label asp-for="Email">Email address:</label>
+            <input asp-for="Email" type="email" required />
+        </div>
+        <div style="margin-bottom: 10px;">
+            <label asp-for="Password">Password:</label>
+            <input asp-for="Password" type="password" required />
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html>

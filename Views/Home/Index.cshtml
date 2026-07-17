@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div style="font-family: monospace; padding: 20px;">
+    <h1>Welcome to PrivateNotes!</h1>
+    <p>Log in or create an account to view your private notes dashboard.</p>
+    
+    <div>
+        <a asp-controller="Account" asp-action="Login" class="me-3">Log in</a>
+        <a asp-controller="Account" asp-action="Register">Register</a>
+    </div>
+</div>
