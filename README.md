@@ -1,23 +1,44 @@
 # User Panel MVC
-A simple ASP.NET Core MVC web app featuring secure user registration, role-based dashboards and a personal board for taking notes.
 
-## Getting started
-1. Open the project folder in your terminal and run the command:
-   dotnet run
-2. Open your browser and go to: http://localhost:5272
+Register, log in, take notes, feel important on an admin page. Classic ASP.NET Core MVC — cookies, roles, BCrypt, no JWT ceremony required.
 
-## Testing accounts
-* Regular User: Go to /Account/Register to create a new account. It automatically gets the User role.
-* Admin Account: Automatically seeded in the database on startup:
-   - Email: smartstudent@pjwstk.edu.pl
-   - Password: 12345_67_8
+A small web app with user registration, role-based access, a personal notes dashboard, and a separate admin area. SQLite keeps setup painless; the auth flow is the real star.
 
-## Code guide
-* Password Hashing: Handled in Services/AuthService.cs using BCrypt.Net.BCrypt.HashPassword() and checked via BCrypt.Net.BCrypt.Verify().
-* Auth Configuration: Configured in Program.cs via builder.Services.AddAuthentication() and cookie middleware.
-* Security Guardrails: Enforced using [Authorize] attributes:
-   - DashboardController.cs uses [Authorize] to block guests from viewing or adding notes.
-   - AdminController.cs uses [Authorize(Roles = "Admin")] to restrict access to admins only.
+## What it does
+
+- **Register & login** — cookie-based authentication with hashed passwords
+- **User dashboard** — logged-in users create and view their own notes
+- **Admin panel** — `[Authorize(Roles = "Admin")]` — admins only
+- **Auto-seeded admin** — created on first startup from `appsettings.json`
 
 ## Tech stack
-* ASP.NET Core MVC, EF Core, SQLite (app.db), Cookie Auth & BCrypt.Net.
+
+- **ASP.NET Core MVC**
+- **EF Core** + **SQLite** (`app.db`)
+- **Cookie authentication**
+- **BCrypt.Net** for password hashing
+
+## Main routes
+
+| Area | Route | Who |
+|------|-------|-----|
+| Home | `/` | Everyone |
+| Register | `/Account/Register` | Guests |
+| Login | `/Account/Login` | Guests |
+| Notes dashboard | `/Dashboard` | Authenticated users |
+| Admin | `/Admin` | Admin role only |
+
+## Run it locally
+
+1. From the project folder:
+   ```bash
+   dotnet run
+   ```
+2. Open **http://localhost:5272**
+3. **Try it:**
+   - Register a normal user at `/Account/Register` → gets the **User** role automatically
+   - Or log in as the seeded admin (from `appsettings.json`):
+     - Email: `smartstudent@pjwstk.edu.pl`
+     - Password: `12345_67_8`
+
+The SQLite database is created on first run — no manual DB setup.
