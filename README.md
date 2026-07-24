@@ -1,8 +1,8 @@
-# User Panel MVC
+# User Panel
 
 Register, log in, take notes, feel important on an admin page. Classic ASP.NET Core MVC — cookies, roles, BCrypt, no JWT ceremony required.
 
-A small web app with user registration, role-based access, a personal notes dashboard, and a separate admin area. SQLite keeps setup painless; the auth flow is the real star.
+A small web app with user registration, role-based access, a personal notes dashboard and a separate admin area.
 
 ## What it does
 
